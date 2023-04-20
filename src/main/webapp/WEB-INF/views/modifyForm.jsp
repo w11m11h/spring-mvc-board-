@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="button" value="저장">					
+					<input type="submit" value="저장">					
 					<input type="button" value="취소" onclick="javascript:history.back()">
 					<input type="button" value="글목록" onclick="script:window.location.href='list'">
 				</td>
