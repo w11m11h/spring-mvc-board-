@@ -90,4 +90,16 @@ public class BoardController {
 		
 		return "redirect:list";
 	}
+	
+	@RequestMapping(value = "/reply_form")
+	public String reply_form(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		BContentCommand command = new BContentCommand();
+		command.execute(model);
+		
+		return "replyForm";
+	}
+	
 }
