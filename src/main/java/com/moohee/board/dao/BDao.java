@@ -111,6 +111,9 @@ public class BDao {
 		return dtos;
 	}
 	public BDto content_view(String boardId) {
+		
+		upHit(boardId); //조회수 증가 메서드 호출
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -173,6 +176,69 @@ public class BDao {
 			pstmt.setString(2, btitle);
 			pstmt.setString(3, bcontent);
 			pstmt.setString(4, bid);
+			
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	public void delete(String bid) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			String sql = "DELETE FROM mvc_board WHERE bid=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bid);
+			
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public void upHit(String bid) { //조회수(bhit)를 1씩 증가해주는 메서드
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			String sql = "UPDATE mvc_board SET bhit=bhit+1 WHERE bid=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bid);
 			
 			pstmt.executeUpdate();
 			

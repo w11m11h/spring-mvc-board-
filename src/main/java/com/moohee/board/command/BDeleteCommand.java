@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import com.moohee.board.dao.BDao;
 import com.moohee.board.dto.BDto;
 
-public class BContentCommand implements BCommand {
+public class BDeleteCommand implements BCommand {
 
 	@Override
 	public void execute(Model model) {
@@ -22,11 +22,7 @@ public class BContentCommand implements BCommand {
 		String bid = request.getParameter("bid");
 		
 		BDao dao = new BDao();
-		BDto dto = dao.content_view(bid);
-		//dao.upHit(bid);
-		
-		model.addAttribute("content", dto);
-
+		dao.delete(bid);
 	}
 
 }

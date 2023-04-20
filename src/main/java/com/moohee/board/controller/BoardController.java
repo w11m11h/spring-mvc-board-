@@ -7,12 +7,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.moohee.board.command.BContentCommand;
+import com.moohee.board.command.BDeleteCommand;
 import com.moohee.board.command.BListCommand;
 import com.moohee.board.command.BModifyCommand;
 import com.moohee.board.command.BWriteCommand;
 
 @Controller
 public class BoardController {
+	
+	@RequestMapping(value = "/")
+	public String index() {
+		
+		return "redirect:list";
+	}
 	
 	@RequestMapping(value = "/write_form")
 	public String write_form() {
@@ -68,6 +75,17 @@ public class BoardController {
 		model.addAttribute("request", request);
 		
 		BModifyCommand command = new BModifyCommand();
+		command.execute(model);
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "/delete")
+	public String delete(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		BDeleteCommand command = new BDeleteCommand();
 		command.execute(model);
 		
 		return "redirect:list";
