@@ -11,13 +11,17 @@
 	<hr>	
 	<table border="1" cellspacing="0" cellpadding="0" width="500">
 		<form action="reply">
+		<input type="hidden" name="bid" value="${content.bid }">
+		<input type="hidden" name="bgroup" value="${content.bgroup }">
+		<input type="hidden" name="bstep" value="${content.bstep }">
+		<input type="hidden" name="bindent" value="${content.bindent }">
 		<tr>
 			<td>번 호</td>
 			<td>${content.bid }</td>
 		</tr>
 		<tr>
-			<td>글쓴이</td>
-			<td>${content.bname }</td>
+			<td>답변자</td>
+			<td><input type="text" name="bname" size="60"></td>
 		</tr>
 		<tr>
 			<td>제 목</td>

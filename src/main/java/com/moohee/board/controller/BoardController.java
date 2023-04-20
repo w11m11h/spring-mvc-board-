@@ -10,6 +10,7 @@ import com.moohee.board.command.BContentCommand;
 import com.moohee.board.command.BDeleteCommand;
 import com.moohee.board.command.BListCommand;
 import com.moohee.board.command.BModifyCommand;
+import com.moohee.board.command.BReplyCommand;
 import com.moohee.board.command.BWriteCommand;
 
 @Controller
@@ -100,6 +101,17 @@ public class BoardController {
 		command.execute(model);
 		
 		return "replyForm";
+	}
+	
+	@RequestMapping(value = "/reply")
+	public String reply(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		BReplyCommand command = new BReplyCommand();
+		command.execute(model);
+		
+		return "redirect:list";
 	}
 	
 }
